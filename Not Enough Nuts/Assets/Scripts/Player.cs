@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
     PlayerState state = PlayerState.Normal;
 
     private int nutCount = 0;
-    private int nutGoal = 5;
+    private int nutGoal = 0;
     private Transform bulletSpawn;
     private Object bulletPrefab;
     private Rigidbody2D rigidbody_2d;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
     private Animator animator;
     private int AnimationState;
 
-    private int direction;
+    private int direction = 4;
 
     private int idle = 0;
     private int right = 3;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
 	void Start () 
     {
         bulletSpawn = this.transform.FindChild("BulletSpawn");
-        bulletPrefab = Resources.Load("bullet");
+        bulletPrefab = Resources.Load("BulletNut");
 
         rigidbody_2d = this.GetComponent<Rigidbody2D>();
 
@@ -57,7 +57,11 @@ public class Player : MonoBehaviour {
             
         if(Input.GetKeyDown(KeyCode.E))
         {
-            ShootNuts();
+            if (nutCount != 0)
+            {
+                ShootNuts();
+                nutCount--;
+            }
         }
 
         else if(Input.GetKeyDown(KeyCode.Q))
@@ -114,7 +118,8 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree")
+        Debug.Log(coll.gameObject.tag);
+        if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
         {
             jumpcounter = 0;
 
@@ -122,12 +127,11 @@ public class Player : MonoBehaviour {
             jumpState = 0;
         }
 
-        if (coll.gameObject.tag == "Nut")
+        if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet")
         {
             Destroy(coll.gameObject);
             nutCount++;
         }
-
     }
 
     void OnTriggerEnter2d(Collider2D other)
@@ -140,6 +144,7 @@ public class Player : MonoBehaviour {
     
     public void ShootNuts()
     {
+        this.transform.gameObject.tag = "NotPlayer";
         GameObject bullet = Instantiate(bulletPrefab) as GameObject;
         bullet.transform.position = bulletSpawn.position;
 
@@ -153,6 +158,7 @@ public class Player : MonoBehaviour {
             Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
             bulletBody.AddForce(new Vector2(-1000, 120));
         }
+        this.transform.gameObject.tag = "Player";
     }
 
     public void climbTree()
