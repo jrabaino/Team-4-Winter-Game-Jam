@@ -2,12 +2,20 @@
 using System.Collections;
 
 public class Movement : MonoBehaviour {
-    
+
+    GameObject myGameObject = new GameObject("Test Object"); 
+    Rigidbody gameObjectsRigidBody = myGameObject.AddComponent<Rigidbody>();
+
+    public GameObject platform;
     public float speedRight;
     public float speedLeft;
     public float speedUp;
+    bool jumpcounter = false;
+   
+
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 	
 	}
 	
@@ -15,26 +23,26 @@ public class Movement : MonoBehaviour {
 	void Update () 
     {
 
-        if (Input.GetKeyDown("space") & transform.position.y <= .2 )
+        if (Input.GetKeyDown("space") & jumpcounter == false)
         {
-
+            RigidBody2D.AddForce(Vector2.up);
             
-            transform.position += Vector3.up * speedUp * Time.deltaTime;
+           
         }
  
         
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * speedRight * Time.deltaTime;
+            transform.position += Vector2.right * speedRight * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.left * speedLeft * Time.deltaTime;
+            transform.position += Vector2.left * speedLeft * Time.deltaTime;
         }
- 
-         
-   
-     
+    }
+    void LateUpdate()
+     {
+         jumpcounter = false;
+     }
 	
-	}
 }
