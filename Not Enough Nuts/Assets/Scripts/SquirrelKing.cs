@@ -19,7 +19,6 @@ public class SquirrelKing : MonoBehaviour {
     {
         if (coll.gameObject.tag == "bullet")
         {
-            Debug.Log("turned in nut!");
             gameManager.TurnInNut();
         }
     }
