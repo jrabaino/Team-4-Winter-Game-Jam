@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 
     private Transform bulletSpawn;
     private Object bulletPrefab;
+    private Rigidbody2D rigidbody_2d;
 
 
 	// Use this for initialization
@@ -15,6 +16,9 @@ public class Player : MonoBehaviour {
     {
         bulletSpawn = this.transform.FindChild("BulletSpawn");
         bulletPrefab = Resources.Load("bullet");
+
+        rigidbody_2d = this.GetComponent<Rigidbody2D>();
+
 	}
 	
 	// Update is called once per frame
