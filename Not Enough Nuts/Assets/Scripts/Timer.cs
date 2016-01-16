@@ -8,13 +8,15 @@ public class Timer : MonoBehaviour
 {
     public double startTime = 9.0;
     public double timeLeft = 0.0;
-    public Text timer;
+    private Text timer;
 
     // Use this for initialization
     void Start()
     {
         //StartCoroutine (countdown ());
         timeLeft = startTime;
+        GameObject canvas = GameObject.Find("HUD");
+        timer = canvas.transform.FindChild("TimerBG").FindChild("TimeLeft").GetComponent<Text>();
 
 
 
