@@ -19,6 +19,17 @@ public class Player : MonoBehaviour {
     public float moveleft;
 
 
+    private Animator animator;
+
+    private int direction;
+
+    private int idle = 0;
+    private int up = 1;
+    private int down = 2;
+    private int right = 3;
+    private int left = 4;
+
+    public Camera mainCamera;
 
 
 	// Use this for initialization
@@ -28,7 +39,6 @@ public class Player : MonoBehaviour {
         bulletPrefab = Resources.Load("bullet");
 
         rigidbody_2d = this.GetComponent<Rigidbody2D>();
-        
 
 	}
 	
@@ -63,12 +73,30 @@ public class Player : MonoBehaviour {
             if  (Input.GetKey(KeyCode.D))
             {
                 rigidbody_2d.AddForce(transform.right * moveright);
+
+                if (direction != right)
+                {
+                    direction = right;
+                    Vector3 theScale = this.transform.localScale;
+                    theScale.x *= -1;
+                    this.transform.localScale = theScale;
+                }
             }
             if (Input.GetKey(KeyCode.A))
-            
             {
-                rigidbody_2d.AddForce( - transform.right * moveleft);
+                rigidbody_2d.AddForce(-transform.right * moveleft);
+
+                if (direction != left)
+                {
+                    direction = left;
+                    Vector3 theScale = this.transform.localScale;
+                    theScale.x *= -1;
+                    this.transform.localScale = theScale;
+                }
             }
+
+            Vector3 playerInfo = this.transform.transform.position;
+            mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
         }
     }
 
