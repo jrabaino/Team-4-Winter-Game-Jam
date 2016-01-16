@@ -40,6 +40,7 @@ public class Player : MonoBehaviour {
         bulletPrefab = Resources.Load("BulletNut");
 
         rigidbody_2d = this.GetComponent<Rigidbody2D>();
+        
 
         animator = this.GetComponent<Animator>();
 	}
@@ -47,10 +48,6 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	
 	    
-        
-
-          
-	
     void Update()
     {
         
@@ -64,13 +61,8 @@ public class Player : MonoBehaviour {
             }
         }
 
-        else if(Input.GetKeyDown(KeyCode.Q))
-        {
-           
-        }
+
         
-        if (state == PlayerState.Normal)
-        {
             if (Input.GetKeyDown("space") && jumpcounter < 2)
             {
                 animator.SetInteger("AnimationState", 1);
@@ -80,7 +72,18 @@ public class Player : MonoBehaviour {
                 jumpState = 1;
 
             }
-            else if  (Input.GetKey(KeyCode.D))
+        
+        else if (state == PlayerState.Climbing)
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                
+               rigidbody_2d.AddForce(transform.up * jump * 3/4);
+
+
+            }
+        }
+        if  (Input.GetKey(KeyCode.D))
             {
                 animator.SetInteger("AnimationState", 2);
                 rigidbody_2d.AddForce(transform.right * moveright);
@@ -93,7 +96,7 @@ public class Player : MonoBehaviour {
                     this.transform.localScale = theScale;
                 }
             }
-            else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
             {
                 animator.SetInteger("AnimationState", 2);
                 rigidbody_2d.AddForce(-transform.right * moveleft);
@@ -106,22 +109,31 @@ public class Player : MonoBehaviour {
                     this.transform.localScale = theScale;
                 }
             }
-            else if (jumpState == 0)
+        if (jumpState == 0)
             {
                 animator.SetInteger("AnimationState", 0);
             }
 
             Vector3 playerInfo = this.transform.transform.position;
             mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
-        }
+        
+            
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
+<<<<<<< HEAD
         Debug.Log(coll.gameObject.tag);
         if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
+=======
+        if (coll.gameObject.tag == "Platform")
+>>>>>>> origin/master
         {
-            jumpcounter = 0;
+            Transform Yposition = coll.gameObject.GetComponent<Transform>();
+            if (this.transform.position.y >= Yposition.position.y)
+            {
+                jumpcounter = 0;
+            }
 
             animator.SetInteger("AnimationState", 0);
             jumpState = 0;
@@ -131,18 +143,33 @@ public class Player : MonoBehaviour {
         {
             Destroy(coll.gameObject);
             nutCount++;
-        }
-    }
-
-    void OnTriggerEnter2d(Collider2D other)
-    {
-        if (other.gameObject.tag == "Tree")
-        {
-            print("On Tree");
+            rigidbody_2d.gravityScale += .10f;
         }
     }
     
-    public void ShootNuts()
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Tree")
+        {
+            state = PlayerState.Climbing;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        jumpcounter = 2;
+    }
+    
+    void OnTriggerExit2D(Collider2D other)
+    {
+        state = PlayerState.Normal;
+        jumpcounter = 0;
+    }
+    
+    
+    
+   public void ShootNuts()
     {
         this.transform.gameObject.tag = "NotPlayer";
         GameObject bullet = Instantiate(bulletPrefab) as GameObject;
@@ -158,7 +185,11 @@ public class Player : MonoBehaviour {
             Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
             bulletBody.AddForce(new Vector2(-1000, 120));
         }
+<<<<<<< HEAD
         this.transform.gameObject.tag = "Player";
+=======
+        rigidbody_2d.gravityScale -= .10f;
+>>>>>>> origin/master
     }
 
     public void climbTree()
