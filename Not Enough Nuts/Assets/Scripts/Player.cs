@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
         if (bullet.transform.position.x > this.transform.position.x)
         {
             Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
-            bulletBody.AddForce(new Vector2(300, 150));
+            bulletBody.AddForce(new Vector2(1000, 120));
         }
     }
 
