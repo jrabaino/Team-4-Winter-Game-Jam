@@ -62,6 +62,13 @@ public class Player : MonoBehaviour {
         {
             jumpcounter = 0;
         }
+
+        if (coll.gameObject.tag == "Nut")
+        {
+            Destroy(coll.gameObject);
+            nutCount++;
+        }
+
     }
     
     public void ShootNuts()
@@ -75,6 +82,11 @@ public class Player : MonoBehaviour {
             bulletBody.AddForce(new Vector2(1000, 120));
         }
     }
+
+
+
+
+
 
     public int GetNutCount()
     {
