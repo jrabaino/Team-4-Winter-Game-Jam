@@ -60,11 +60,11 @@ public class Player : MonoBehaviour {
                 jumpcounter += 1;
                 rigidbody_2d.AddForce(transform.up * jump);
             }
-            if  (Input.GetKey(KeyCode.D))
+            if  (Input.GetKey(KeyCode.D) && jumpcounter ==0)
             {
                 rigidbody_2d.AddForce(transform.right * moveright);
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) && jumpcounter == 0)
             
             {
                 rigidbody_2d.AddForce( - transform.right * moveleft);
