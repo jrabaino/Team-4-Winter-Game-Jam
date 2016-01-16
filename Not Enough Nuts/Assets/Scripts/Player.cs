@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
+    enum PlayerState { Normal, Climbing };
+
+    PlayerState state = PlayerState.Normal;
 
     private int nutCount = 0;
     private int nutGoal = 5;
@@ -9,10 +12,13 @@ public class Player : MonoBehaviour {
     private Object bulletPrefab;
     private Rigidbody2D rigidbody_2d;
     private int jumpcounter = 0;
+    private bool treeTrigger = false;
 
     public float jump;
     public float moveright;
     public float moveleft;
+
+
 
 
 	// Use this for initialization
@@ -27,32 +33,42 @@ public class Player : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
-    {
-	    if(Input.GetKeyDown(KeyCode.E))
-        {
-            ShootNuts();
-        }
+	
+	    
         
 
           
-	}
-    void FixedUpdate()
+	
+    void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            rigidbody_2d.AddForce(transform.up * jump);
-            jumpcounter++;
+        
             
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            ShootNuts();
+        }
 
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
+        else if(Input.GetKeyDown(KeyCode.Q))
         {
-            rigidbody_2d.AddForce(transform.right * moveright);
+           
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        
+        if (state == PlayerState.Normal)
         {
-            rigidbody_2d.AddForce( - transform.right * moveleft);
+            if (Input.GetKeyDown("space") && jumpcounter < 2)
+            {
+                jumpcounter += 1;
+                rigidbody_2d.AddForce(transform.up * jump);
+            }
+            if  (Input.GetKey(KeyCode.D))
+            {
+                rigidbody_2d.AddForce(transform.right * moveright);
+            }
+            if (Input.GetKey(KeyCode.A))
+            
+            {
+                rigidbody_2d.AddForce( - transform.right * moveleft);
+            }
         }
     }
 
@@ -70,6 +86,14 @@ public class Player : MonoBehaviour {
         }
 
     }
+
+    void OnTriggerEnter2d(Collider2D other)
+    {
+        if (other.gameObject.tag == "Tree")
+        {
+            print("On Tree");
+        }
+    }
     
     public void ShootNuts()
     {
@@ -83,10 +107,11 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public void climbTree()
+    {
+        state = PlayerState.Climbing;
 
-
-
-
+    }
 
     public int GetNutCount()
     {
