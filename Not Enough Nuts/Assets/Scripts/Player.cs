@@ -68,6 +68,12 @@ public class Player : MonoBehaviour {
     {
         GameObject bullet = Instantiate(bulletPrefab) as GameObject;
         bullet.transform.position = bulletSpawn.position;
+
+        if (bullet.transform.position.x > this.transform.position.x)
+        {
+            Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+            bulletBody.AddForce(new Vector2(300, 150));
+        }
     }
 
     public int GetNutCount()
