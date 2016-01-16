@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 //using Math;
 public class Timer : MonoBehaviour
 {
@@ -34,7 +33,7 @@ public class Timer : MonoBehaviour
         timer.text = minutes.ToString() + ":" + s;
         if (timeLeft <= 0)
         {
-                SceneManager.LoadScene("GameOver");
+                Application.LoadLevel("GameOver");
                 timeLeft = 0.0;
         }
 
