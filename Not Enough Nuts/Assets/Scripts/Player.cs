@@ -74,7 +74,7 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if(coll.gameObject.tag == "Platform")
+        if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree")
         {
             jumpcounter = 0;
         }
@@ -104,6 +104,11 @@ public class Player : MonoBehaviour {
         {
             Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
             bulletBody.AddForce(new Vector2(1000, 120));
+        }
+        else
+        {
+            Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+            bulletBody.AddForce(new Vector2(-1000, 120));
         }
     }
 
