@@ -1,7 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{96F92412-640A-4E7D-008D-BAA033589B43}") = "Not Enough Nuts", "Assembly-CSharp.csproj", "{706A4776-ECDA-D688-F1D3-898A64A38D17}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Not Enough Nuts.CSharp", "Not Enough Nuts.CSharp.csproj", "{FD3C29FB-7692-D0AE-53AA-173C973FAD2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,16 +9,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{706A4776-ECDA-D688-F1D3-898A64A38D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{706A4776-ECDA-D688-F1D3-898A64A38D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{706A4776-ECDA-D688-F1D3-898A64A38D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{706A4776-ECDA-D688-F1D3-898A64A38D17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD3C29FB-7692-D0AE-53AA-173C973FAD2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD3C29FB-7692-D0AE-53AA-173C973FAD2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD3C29FB-7692-D0AE-53AA-173C973FAD2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD3C29FB-7692-D0AE-53AA-173C973FAD2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+<<<<<<< HEAD
 																		GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 
+=======
+>>>>>>> origin/master
 EndGlobal
