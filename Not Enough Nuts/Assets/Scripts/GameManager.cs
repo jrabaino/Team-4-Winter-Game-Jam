@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Squirrel").GetComponent<Player>();
-        GameObject canvas = GameObject.Find("Canvas");
+        GameObject canvas = GameObject.Find("HUD");
         carriedNutsGUI = canvas.transform.FindChild("GoalBG").FindChild("Carrying").GetComponent<Text>();
         goalGUI = canvas.transform.FindChild("GoalBG").FindChild("Goal").GetComponent<Text>();
 
-        goal = 15;
-        turnedIn = 8;
+        goal = 10;
+        turnedIn = 0;
 
 	}
 	
