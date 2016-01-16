@@ -105,6 +105,11 @@ public class Player : MonoBehaviour {
             Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
             bulletBody.AddForce(new Vector2(1000, 120));
         }
+        else
+        {
+            Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+            bulletBody.AddForce(new Vector2(-1000, 120));
+        }
     }
 
     public void climbTree()
