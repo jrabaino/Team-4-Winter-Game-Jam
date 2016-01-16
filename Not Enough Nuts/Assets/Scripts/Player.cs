@@ -74,7 +74,7 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if(coll.gameObject.tag == "Platform")
+        if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree")
         {
             jumpcounter = 0;
         }
