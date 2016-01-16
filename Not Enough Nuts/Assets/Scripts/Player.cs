@@ -20,14 +20,15 @@ public class Player : MonoBehaviour {
 
 
     private Animator animator;
+    private int AnimationState;
 
     private int direction;
 
     private int idle = 0;
-    private int up = 1;
-    private int down = 2;
     private int right = 3;
     private int left = 4;
+
+    private int jumpState = 0;
 
     public Camera mainCamera;
 
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour {
 
         rigidbody_2d = this.GetComponent<Rigidbody2D>();
 
+        animator = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -67,11 +69,16 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetKeyDown("space") && jumpcounter < 2)
             {
+                animator.SetInteger("AnimationState", 1);
                 jumpcounter += 1;
                 rigidbody_2d.AddForce(transform.up * jump);
+
+                jumpState = 1;
+
             }
-            if  (Input.GetKey(KeyCode.D))
+            else if  (Input.GetKey(KeyCode.D))
             {
+                animator.SetInteger("AnimationState", 2);
                 rigidbody_2d.AddForce(transform.right * moveright);
 
                 if (direction != right)
@@ -82,8 +89,9 @@ public class Player : MonoBehaviour {
                     this.transform.localScale = theScale;
                 }
             }
-            if (Input.GetKey(KeyCode.A))
+            else if (Input.GetKey(KeyCode.A))
             {
+                animator.SetInteger("AnimationState", 2);
                 rigidbody_2d.AddForce(-transform.right * moveleft);
 
                 if (direction != left)
@@ -93,6 +101,10 @@ public class Player : MonoBehaviour {
                     theScale.x *= -1;
                     this.transform.localScale = theScale;
                 }
+            }
+            else if (jumpState == 0)
+            {
+                animator.SetInteger("AnimationState", 0);
             }
 
             Vector3 playerInfo = this.transform.transform.position;
@@ -105,6 +117,9 @@ public class Player : MonoBehaviour {
         if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree")
         {
             jumpcounter = 0;
+
+            animator.SetInteger("AnimationState", 0);
+            jumpState = 0;
         }
 
         if (coll.gameObject.tag == "Nut")
