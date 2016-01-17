@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour {
     private Text goalGUI;
     private int level;
     private Dialogue dialogue;
-
-    public AudioSource Hitmark;
     private Timer timer;
     
 
@@ -40,7 +38,6 @@ public class GameManager : MonoBehaviour {
     public void TurnInNut()
     {
         turnedIn++;
-        Hitmark.Play();
     }
     private string KingSays()
     {
