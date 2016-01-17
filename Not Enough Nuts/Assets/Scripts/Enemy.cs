@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+    private Player player;
 	// Use this for initialization
 	void Start () {
-	
+        player = GameObject.Find("Squirrel").GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +20,10 @@ public class Enemy : MonoBehaviour {
         {
             Destroy(gameObject);
             Destroy(coll.gameObject);
+        }
+        if (coll.gameObject.tag == "Player")
+        {
+            player.LoseYourShit();
         }
     }
 }
