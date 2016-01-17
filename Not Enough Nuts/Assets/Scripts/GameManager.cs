@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour {
     private Text goalGUI;
     private int level;
     private Dialogue dialogue;
-    
+
+    public AudioSource Turnin;
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour {
     public void TurnInNut()
     {
         turnedIn++;
+        Turnin.Play();
     }
     private void goalCheck()
     {
