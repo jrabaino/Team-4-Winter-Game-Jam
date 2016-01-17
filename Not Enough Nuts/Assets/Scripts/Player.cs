@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//hi
+
 public class Player : MonoBehaviour {
     enum PlayerState { Normal, Climbing };
 
