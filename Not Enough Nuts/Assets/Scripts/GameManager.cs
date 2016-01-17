@@ -11,7 +11,12 @@ public class GameManager : MonoBehaviour {
     private Text goalGUI;
     private int level;
     private Dialogue dialogue;
+<<<<<<< HEAD
+
+    public AudioSource Hitmark;
+=======
     private Timer timer;
+>>>>>>> origin/master
     
 
 	// Use this for initialization
@@ -38,6 +43,7 @@ public class GameManager : MonoBehaviour {
     public void TurnInNut()
     {
         turnedIn++;
+        Hitmark.Play();
     }
     private string KingSays()
     {
