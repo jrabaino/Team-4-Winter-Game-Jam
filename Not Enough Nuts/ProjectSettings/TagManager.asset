@@ -15,6 +15,7 @@ TagManager:
   - Enemy
   - TeleportPad1
   - TeleportPad2
+  - Mole
   layers:
   - Default
   - TransparentFX

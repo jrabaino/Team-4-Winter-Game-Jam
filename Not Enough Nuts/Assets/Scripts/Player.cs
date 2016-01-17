@@ -269,6 +269,12 @@ public class Player : MonoBehaviour {
         return nutGoal;
     }
 
+    public void PayTheMoleToll(int toll)
+    {
+        nutCount -= toll;
+        rigidbody_2d.gravityScale -= toll*.10f;
+        rigidbody_2d.mass -= toll*.10f;
+    }
 
 
 
