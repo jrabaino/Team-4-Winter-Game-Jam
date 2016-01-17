@@ -53,8 +53,7 @@ public class Player : MonoBehaviour {
 	    
     void Update()
     {
-        Debug.Log(state);
-            
+        //Debug.Log(AnimationState);
         if(Input.GetKeyDown(KeyCode.E))
         {
             if (nutCount != 0)
@@ -69,6 +68,8 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown("space") && jumpcounter < 2)
         {
             animator.SetInteger("AnimationState", 1);
+            AnimationState = 1;
+
             jumpcounter += 1;
             rigidbody_2d.AddForce(transform.up * jump);
 
@@ -80,7 +81,9 @@ public class Player : MonoBehaviour {
         {
             //if (Input.GetKey(KeyCode.W))//Input.GetKeyDown("space"))
             //{
+            jumpcounter = 2;
                animator.SetInteger("AnimationState", 3);
+               AnimationState = 3;
 
                //rigidbody_2d.AddForce(transform.up * jump * 3/4);
                rigidbody_2d.AddForce(transform.up * moveup);
@@ -92,6 +95,8 @@ public class Player : MonoBehaviour {
         else if  (Input.GetKey(KeyCode.D))
         {
             animator.SetInteger("AnimationState", 2);
+            AnimationState = 2;
+
             rigidbody_2d.AddForce(transform.right * moveright);
 
             if (direction != right)
@@ -106,6 +111,8 @@ public class Player : MonoBehaviour {
         else if (Input.GetKey(KeyCode.A))
         {
             animator.SetInteger("AnimationState", 2);
+            AnimationState = 2;
+
             rigidbody_2d.AddForce(-transform.right * moveleft);
 
             if (direction != left)
@@ -119,9 +126,12 @@ public class Player : MonoBehaviour {
 
         else if (jumpState == 0)
         {
-            animator.SetInteger("AnimationState", 0);
+            if (AnimationState != 3)
+            {
+                animator.SetInteger("AnimationState", 0);
+                AnimationState = 0;
+            }
         }
-
         Vector3 playerInfo = this.transform.transform.position;
         mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
         
@@ -156,6 +166,7 @@ public class Player : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("enter");
         if (other.gameObject.tag == "Tree")
         {
             state = PlayerState.Climbing;
@@ -169,6 +180,7 @@ public class Player : MonoBehaviour {
     
     void OnTriggerExit2D(Collider2D other)
     {
+        Debug.Log("exit");
         state = PlayerState.Normal;
         jumpcounter = 0;
     }

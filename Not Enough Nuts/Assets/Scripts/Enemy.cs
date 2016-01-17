@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
         }
         if (coll.gameObject.tag == "Player")
         {
-            player.LoseYourShit();
+            //player.LoseYourShit();
         }
     }
 }
