@@ -155,14 +155,33 @@ public class Player : MonoBehaviour {
             jumpState = 0;
         }
 
-        if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet")
+        if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet" || coll.gameObject.tag == "Dropped")
         {
             Destroy(coll.gameObject);
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
         }
     }
-    
+
+    public void LoseYourShit()
+    {
+        this.transform.gameObject.tag = "NotPlayer";
+        int toEject = nutCount;
+        for (int i = 0; i < toEject; i++)
+        {
+
+            GameObject bullet = Instantiate(bulletPrefab) as GameObject;
+            bullet.transform.gameObject.tag = "Dropped";
+            bullet.transform.position = bulletSpawn.position;
+            Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+            int x = Random.Range(-1000, 1000);
+            bulletBody.AddForce(new Vector2(x, 1000)); //rng for x value on force
+            nutCount--;
+            Debug.Log("i is " + i.ToString());
+            Debug.Log("nutcount is " + nutCount.ToString());
+        }
+        this.transform.gameObject.tag = "Player";
+    }
     
     void OnTriggerEnter2D(Collider2D other)
     {
