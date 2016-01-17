@@ -35,6 +35,8 @@ public class Player : MonoBehaviour {
 
     public Camera mainCamera;
 
+    private Dialogue dialogue;
+
 
 	// Use this for initialization
 	void Start () 
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour {
         
 
         animator = this.GetComponent<Animator>();
+        dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
 	}
 	
 	// Update is called once per frame
@@ -53,97 +56,105 @@ public class Player : MonoBehaviour {
 	    
     void Update()
     {
-        Debug.Log(AnimationState);
-        if(Input.GetKeyDown(KeyCode.E))
+        //Debug.Log(AnimationState);
+        if (!dialogue.IsSomeoneTalking())
         {
-            if (nutCount != 0)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                ShootNuts();
-                nutCount--;
+                if (nutCount != 0)
+                {
+                    ShootNuts();
+                    nutCount--;
+                }
             }
-        }
 
 
-        
-        if (Input.GetKeyDown("space") && jumpcounter < 2)
-        {
-            animator.SetInteger("AnimationState", 1);
-            AnimationState = 1;
 
-            jumpcounter += 1;
-            rigidbody_2d.AddForce(transform.up * jump);
-
-            jumpState = 1;
-
-        }
-        
-        else if (Input.GetKey(KeyCode.W) && state == PlayerState.Climbing)
-        {
-            //if (Input.GetKey(KeyCode.W))//Input.GetKeyDown("space"))
-            //{
-            jumpcounter = 2;
-               animator.SetInteger("AnimationState", 3);
-               AnimationState = 3;
-
-               //rigidbody_2d.AddForce(transform.up * jump * 3/4);
-               rigidbody_2d.AddForce(transform.up * moveup);
-            //}
-
-
-        }
-
-        else if  (Input.GetKey(KeyCode.D))
-        {
-            animator.SetInteger("AnimationState", 2);
-            AnimationState = 2;
-
-            rigidbody_2d.AddForce(transform.right * moveright);
-
-            if (direction != right)
+            if (Input.GetKeyDown("space") && jumpcounter < 2)
             {
-                direction = right;
-                Vector3 theScale = this.transform.localScale;
-                theScale.x *= -1;
-                this.transform.localScale = theScale;
+
+                animator.SetInteger("AnimationState", 1);
+                AnimationState = 1;
+
+                jumpcounter += 1;
+                rigidbody_2d.AddForce(transform.up * jump);
+
+                jumpState = 1;
+
             }
-        }
 
-        else if (Input.GetKey(KeyCode.A))
-        {
-            animator.SetInteger("AnimationState", 2);
-            AnimationState = 2;
-
-            rigidbody_2d.AddForce(-transform.right * moveleft);
-
-            if (direction != left)
+            else if (Input.GetKey(KeyCode.W) && state == PlayerState.Climbing)
             {
-                direction = left;
-                Vector3 theScale = this.transform.localScale;
-                theScale.x *= -1;
-                this.transform.localScale = theScale;
-            }
-        }
+                //if (Input.GetKey(KeyCode.W))//Input.GetKeyDown("space"))
+                //{
+                jumpcounter = 2;
+                animator.SetInteger("AnimationState", 3);
+                AnimationState = 3;
 
-        else if (jumpState == 0)
-        {
-            if (AnimationState != 3)
-            {
-                animator.SetInteger("AnimationState", 0);
-                AnimationState = 0;
+                //rigidbody_2d.AddForce(transform.up * jump * 3/4);
+                rigidbody_2d.AddForce(transform.up * moveup);
+                //}
+
+
             }
+
+            else if (Input.GetKey(KeyCode.D))
+            {
+                if (jumpState == 0)
+                {
+                    animator.SetInteger("AnimationState", 2);
+                    AnimationState = 2;
+                }
+
+                rigidbody_2d.AddForce(transform.right * moveright);
+
+                if (direction != right)
+                {
+                    direction = right;
+                    Vector3 theScale = this.transform.localScale;
+                    theScale.x *= -1;
+                    this.transform.localScale = theScale;
+                }
+            }
+
+            else if (Input.GetKey(KeyCode.A))
+            {
+                if (jumpState == 0)
+                {
+                    animator.SetInteger("AnimationState", 2);
+                    AnimationState = 2;
+                }
+
+                rigidbody_2d.AddForce(-transform.right * moveleft);
+
+                if (direction != left)
+                {
+                    direction = left;
+                    Vector3 theScale = this.transform.localScale;
+                    theScale.x *= -1;
+                    this.transform.localScale = theScale;
+                }
+            }
+
+            else if (jumpState == 0)
+            {
+                if (AnimationState != 3)
+                {
+                    animator.SetInteger("AnimationState", 0);
+                    AnimationState = 0;
+                }
+            }
+            Vector3 playerInfo = this.transform.transform.position;
+            mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
         }
-        Vector3 playerInfo = this.transform.transform.position;
-        mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
-        
             
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log(coll.gameObject.tag);
+        //Debug.Log(coll.gameObject.tag);
         if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Wall") // || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
         //if (coll.gameObject.tag == "Platform")
-
         {
             Transform Yposition = coll.gameObject.GetComponent<Transform>();
             if (this.transform.position.y >= Yposition.position.y)
@@ -151,8 +162,17 @@ public class Player : MonoBehaviour {
                 jumpcounter = 0;
             }
 
+            Debug.Log("MADE IT TO HERE!");
             animator.SetInteger("AnimationState", 0);
             jumpState = 0;
+
+            if (coll.gameObject.tag == "Platform")
+            {
+                if (rigidbody_2d.mass > coll.rigidbody.mass)
+                {
+                    coll.rigidbody.isKinematic = false;
+                }
+            }
         }
 
         if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet" || coll.gameObject.tag == "Dropped")
@@ -160,6 +180,7 @@ public class Player : MonoBehaviour {
             Destroy(coll.gameObject);
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
+            rigidbody_2d.mass += .10f;
         }
     }
 
@@ -177,6 +198,8 @@ public class Player : MonoBehaviour {
             int x = Random.Range(-1000, 1000);
             bulletBody.AddForce(new Vector2(x, 1000)); //rng for x value on force
             nutCount--;
+            rigidbody_2d.mass -= .10f;
+            rigidbody_2d.gravityScale -= .10f;
             Debug.Log("i is " + i.ToString());
             Debug.Log("nutcount is " + nutCount.ToString());
         }
@@ -185,7 +208,7 @@ public class Player : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
         if (other.gameObject.tag == "Tree")
         {
             state = PlayerState.Climbing;
@@ -194,7 +217,7 @@ public class Player : MonoBehaviour {
     
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("exit");
+        //Debug.Log("exit");
         state = PlayerState.Normal;
         jumpcounter = 0;
         animator.SetInteger("AnimationState", 1);
@@ -222,6 +245,7 @@ public class Player : MonoBehaviour {
         this.transform.gameObject.tag = "Player";
 
         rigidbody_2d.gravityScale -= .10f;
+        rigidbody_2d.mass -= .10f;
 
     }
 

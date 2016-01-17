@@ -12,6 +12,9 @@ TagManager:
   - Wall
   - NotPlayer
   - Dropped
+  - Enemy
+  - TeleportPad1
+  - TeleportPad2
   layers:
   - Default
   - TransparentFX
