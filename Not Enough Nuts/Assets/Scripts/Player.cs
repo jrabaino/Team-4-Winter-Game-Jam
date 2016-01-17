@@ -269,6 +269,10 @@ public class Player : MonoBehaviour {
         return nutGoal;
     }
 
+    public void PayTheMoleToll(int toll)
+    {
+        nutCount -= toll;
+    }
 
 
 
