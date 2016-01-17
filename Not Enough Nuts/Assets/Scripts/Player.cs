@@ -160,6 +160,14 @@ public class Player : MonoBehaviour {
             Debug.Log("MADE IT TO HERE!");
             animator.SetInteger("AnimationState", 0);
             jumpState = 0;
+
+            if (coll.gameObject.tag == "Platform")
+            {
+                if (rigidbody_2d.mass > coll.rigidbody.mass)
+                {
+                    coll.rigidbody.isKinematic = false;
+                }
+            }
         }
 
         if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet" || coll.gameObject.tag == "Dropped")
@@ -167,6 +175,7 @@ public class Player : MonoBehaviour {
             Destroy(coll.gameObject);
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
+            rigidbody_2d.mass += .10f;
         }
     }
 
@@ -184,6 +193,8 @@ public class Player : MonoBehaviour {
             int x = Random.Range(-1000, 1000);
             bulletBody.AddForce(new Vector2(x, 1000)); //rng for x value on force
             nutCount--;
+            rigidbody_2d.mass -= .10f;
+            rigidbody_2d.gravityScale -= .10f;
             Debug.Log("i is " + i.ToString());
             Debug.Log("nutcount is " + nutCount.ToString());
         }
@@ -229,6 +240,7 @@ public class Player : MonoBehaviour {
         this.transform.gameObject.tag = "Player";
 
         rigidbody_2d.gravityScale -= .10f;
+        rigidbody_2d.mass -= .10f;
 
     }
 
