@@ -131,7 +131,7 @@ public class Player : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log(coll.gameObject.tag);
-        if (coll.gameObject.tag == "Platform") // || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
+        if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Wall") // || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
         //if (coll.gameObject.tag == "Platform")
 
         {
