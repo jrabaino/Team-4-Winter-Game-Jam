@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     private Text goalGUI;
     private int level;
     private Dialogue dialogue;
+    private Timer timer;
     
 
 	// Use this for initialization
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
         carriedNutsGUI = canvas.transform.FindChild("GoalBG").FindChild("Carrying").GetComponent<Text>();
         goalGUI = canvas.transform.FindChild("GoalBG").FindChild("Goal").GetComponent<Text>();
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
+        timer = GameObject.Find("Timer").GetComponent<Timer>();
         level = 1;
         goal = 2;
         turnedIn = 0;
@@ -37,16 +39,27 @@ public class GameManager : MonoBehaviour {
     {
         turnedIn++;
     }
+    private string KingSays()
+    {
+        string[] phrases = { "NUTS FOR THE NUT GOD", "THAT'S A LOT OF NUTS... but not enough", "MORE!!!!!!!!!!!!!!1" };
+        int i = UnityEngine.Random.Range(0, phrases.Length);
+        return phrases[i];
+    }
     private void goalCheck()
     {
+        int goalBefore;
         if (turnedIn >= goal)
         {
-            dialogue.activate("Squirrel King", "NUTS FOR THE NUT GOD!");
+            dialogue.activate("Squirrel King", KingSays());
             level++;
+            goalBefore = goal;
             goal = goal * 2;
+            timer.timeLeft += (10.0 * (goal - goalBefore)); //(adds 10 seconds per additonal nut asked for) 
+
             
             //add in thing later that will display message w/ GUI overlay and talk sprite
         }
 
     }
+    
 }
