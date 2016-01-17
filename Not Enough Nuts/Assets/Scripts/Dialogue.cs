@@ -34,6 +34,7 @@ public class Dialogue : MonoBehaviour {
         }
 	}
 
+
     public void activate(string name, string message)
     {
         HappeningRightNow = true;
@@ -47,6 +48,11 @@ public class Dialogue : MonoBehaviour {
     /*    if(name = "Squirrel King"){
             canvas.transform.FindChild("DialogueBackground").FindChild("Name").GetComponent<Image>();
         }*/ //switch picture based on character name? 
+    }
+    public void deactivate()
+    {
+        DialogueGoing = false;
+        HappeningRightNow = false;
     }
     public bool IsSomeoneTalking()
     {

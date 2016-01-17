@@ -20,7 +20,9 @@ public class Player : MonoBehaviour {
     public float moveright;
     public float moveleft;
     public float moveup;
-
+    
+    
+    public AudioSource Pickup, LoseNuts, Jump1, Jump2, Shoot, NoNutAmmo;
 
     private Animator animator;
     private int AnimationState;
@@ -64,7 +66,13 @@ public class Player : MonoBehaviour {
                 if (nutCount != 0)
                 {
                     ShootNuts();
+                    Shoot.Play();
                     nutCount--;
+
+                }
+                else 
+                {
+                    NoNutAmmo.Play();
                 }
             }
 
@@ -72,10 +80,16 @@ public class Player : MonoBehaviour {
 
             if (Input.GetKeyDown("space") && jumpcounter < 2)
             {
-
+                if(jumpcounter == 0)
+                {
+                    Jump1.Play();
+                }
+                else if(jumpcounter == 1)
+                {
+                    Jump2.Play();
+                }
                 animator.SetInteger("AnimationState", 1);
                 AnimationState = 1;
-
                 jumpcounter += 1;
                 rigidbody_2d.AddForce(transform.up * jump);
 
@@ -181,11 +195,13 @@ public class Player : MonoBehaviour {
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
             rigidbody_2d.mass += .10f;
+            Pickup.Play();
         }
     }
 
     public void LoseYourShit()
     {
+        LoseNuts.Play();
         this.transform.gameObject.tag = "NotPlayer";
         int toEject = nutCount;
         for (int i = 0; i < toEject; i++)
@@ -265,6 +281,12 @@ public class Player : MonoBehaviour {
         return nutGoal;
     }
 
+    public void PayTheMoleToll(int toll)
+    {
+        nutCount -= toll;
+        rigidbody_2d.gravityScale -= toll*.10f;
+        rigidbody_2d.mass -= toll*.10f;
+    }
 
 
 
