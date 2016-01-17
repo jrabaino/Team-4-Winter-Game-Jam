@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     public float jump;
     public float moveright;
     public float moveleft;
+    public float moveup;
 
 
     private Animator animator;
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour {
 	    
     void Update()
     {
-        
+        Debug.Log(state);
             
         if(Input.GetKeyDown(KeyCode.E))
         {
@@ -75,12 +76,17 @@ public class Player : MonoBehaviour {
 
         }
         
-        else if (state == PlayerState.Climbing)
+        else if (Input.GetKey(KeyCode.W) && state == PlayerState.Climbing)
         {
-            if (Input.GetKeyDown("space"))
-            {
-               rigidbody_2d.AddForce(transform.up * jump * 3/4);
-            }
+            //if (Input.GetKey(KeyCode.W))//Input.GetKeyDown("space"))
+            //{
+               animator.SetInteger("AnimationState", 3);
+
+               //rigidbody_2d.AddForce(transform.up * jump * 3/4);
+               rigidbody_2d.AddForce(transform.up * moveup);
+            //}
+
+
         }
 
         else if  (Input.GetKey(KeyCode.D))
@@ -125,7 +131,7 @@ public class Player : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D coll)
     {
         Debug.Log(coll.gameObject.tag);
-        if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
+        if (coll.gameObject.tag == "Platform") // || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
         //if (coll.gameObject.tag == "Platform")
 
         {
