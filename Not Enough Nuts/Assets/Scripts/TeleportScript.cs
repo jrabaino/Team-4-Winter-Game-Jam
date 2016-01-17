@@ -23,13 +23,16 @@ public class TeleportScript : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
+            Debug.Log("Pressed T");
             if (Teleport_Ready1 == true)
             {
+                Debug.Log("T1");
                 Transform Telepad2Trans = Telepad2.GetComponent<Transform>();
                 this.transform.position = Telepad2Trans.position;
             }
             else if(Teleport_Ready2 == true)
             {
+                Debug.Log("T22222");
                 Transform Telepad1Trans = Telepad1.GetComponent<Transform>();
                 this.transform.position = Telepad1Trans.position;
             }
@@ -39,6 +42,7 @@ public class TeleportScript : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D coll)
     {
+        Debug.Log("Is it ready yet");
         if (coll.gameObject.tag == "TeleportPad1")
         {
             Teleport_Ready1 = true;

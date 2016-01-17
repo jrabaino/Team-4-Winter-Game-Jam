@@ -83,13 +83,14 @@ public class Enemy : MonoBehaviour {
             }
         }
 
-        Debug.Log("YOYOYOOYOYYO");
-        Debug.Log(player.transform.position.x);
-        Debug.Log(transform.position.x);
 
-        if (((player.transform.position.x < transform.position.x) && (transform.position.x - player.transform.position.x < 4 && transform.position.x - player.transform.position.x > 1)) || ((player.transform.position.x > transform.position.x) && (player.transform.position.x - transform.position.x < 4 && player.transform.position.x - transform.position.x > 1)))
+        if ((((player.transform.position.x < transform.position.x) && (transform.position.x - player.transform.position.x < 4 && transform.position.x - player.transform.position.x > 1)) || 
+            ((player.transform.position.x > transform.position.x) && (player.transform.position.x - transform.position.x < 4 && player.transform.position.x - transform.position.x > 1))) && 
+
+            (((player.transform.position.y < transform.position.y) && (transform.position.y - player.transform.position.y < 8)) || 
+            ((player.transform.position.y > transform.position.y) && (player.transform.position.y - transform.position.y < 8))))
         {
-            Debug.Log("heyheyhey");
+
             animator.SetInteger("AnimationState", 1);
 
             if (player.transform.position.x > transform.position.x)
