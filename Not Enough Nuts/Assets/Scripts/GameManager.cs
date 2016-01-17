@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     private Text carriedNutsGUI;
     private Text goalGUI;
     private int level;
+    private Dialogue dialogue;
     
 
 	// Use this for initialization
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour {
         GameObject canvas = GameObject.Find("HUD");
         carriedNutsGUI = canvas.transform.FindChild("GoalBG").FindChild("Carrying").GetComponent<Text>();
         goalGUI = canvas.transform.FindChild("GoalBG").FindChild("Goal").GetComponent<Text>();
+        dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
         level = 1;
         goal = 2;
         turnedIn = 0;
@@ -39,8 +41,10 @@ public class GameManager : MonoBehaviour {
     {
         if (turnedIn >= goal)
         {
+            dialogue.activate("Squirrel King", "NUTS FOR THE NUT GOD!");
             level++;
             goal = goal * 2;
+            
             //add in thing later that will display message w/ GUI overlay and talk sprite
         }
 

@@ -12,8 +12,8 @@ public class Dialogue : MonoBehaviour {
     Timer timer;
 	void Start () {
         canvas = GameObject.Find("Dialogue");
-        HappeningRightNow = true; //change later?
-        DialogueGoing = true; ///change later?
+        HappeningRightNow = false; //change later?
+        DialogueGoing = false; ///change later?
         timer = GameObject.Find("Timer").GetComponent<Timer>();
 	}
 	
