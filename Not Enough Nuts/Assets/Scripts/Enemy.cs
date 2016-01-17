@@ -87,8 +87,8 @@ public class Enemy : MonoBehaviour {
         if ((((player.transform.position.x < transform.position.x) && (transform.position.x - player.transform.position.x < 4 && transform.position.x - player.transform.position.x > 1)) || 
             ((player.transform.position.x > transform.position.x) && (player.transform.position.x - transform.position.x < 4 && player.transform.position.x - transform.position.x > 1))) && 
 
-            (((player.transform.position.y < transform.position.y) && (transform.position.y - player.transform.position.y < 8)) || 
-            ((player.transform.position.y > transform.position.y) && (player.transform.position.y - transform.position.y < 8))))
+            (((player.transform.position.y < transform.position.y) && (transform.position.y - player.transform.position.y < 4)) || 
+            ((player.transform.position.y > transform.position.y) && (player.transform.position.y - transform.position.y < 4))))
         {
 
             animator.SetInteger("AnimationState", 1);
