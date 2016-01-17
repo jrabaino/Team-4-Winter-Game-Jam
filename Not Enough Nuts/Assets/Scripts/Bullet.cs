@@ -15,6 +15,9 @@ public class Bullet : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Destroy(gameObject);
+        if (coll.gameObject.tag == "SquirrelKing") // coll.gameObject.tag == "Tree") ; //|| coll.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }

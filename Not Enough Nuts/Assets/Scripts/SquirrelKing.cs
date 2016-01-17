@@ -6,7 +6,7 @@ public class SquirrelKing : MonoBehaviour {
     private int nutsStored;
 	// Use this for initialization
 	void Start () {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
        // gameManager
 	}
 	

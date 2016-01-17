@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//hi
+
 public class Player : MonoBehaviour {
     enum PlayerState { Normal, Climbing };
 
     PlayerState state = PlayerState.Normal;
 
     private int nutCount = 0;
-    private int nutGoal = 5;
+    private int nutGoal = 0;
     private Transform bulletSpawn;
     private Object bulletPrefab;
     private Rigidbody2D rigidbody_2d;
@@ -37,7 +39,7 @@ public class Player : MonoBehaviour {
 	void Start () 
     {
         bulletSpawn = this.transform.FindChild("BulletSpawn");
-        bulletPrefab = Resources.Load("bullet");
+        bulletPrefab = Resources.Load("BulletNut");
 
         rigidbody_2d = this.GetComponent<Rigidbody2D>();
         
@@ -54,71 +56,78 @@ public class Player : MonoBehaviour {
             
         if(Input.GetKeyDown(KeyCode.E))
         {
-            ShootNuts();
+            if (nutCount != 0)
+            {
+                ShootNuts();
+                nutCount--;
+            }
         }
 
 
         
-            if (Input.GetKeyDown("space") && jumpcounter < 2)
-            {
-                animator.SetInteger("AnimationState", 1);
-                jumpcounter += 1;
-                rigidbody_2d.AddForce(transform.up * jump);
+        if (Input.GetKeyDown("space") && jumpcounter < 2)
+        {
+            animator.SetInteger("AnimationState", 1);
+            jumpcounter += 1;
+            rigidbody_2d.AddForce(transform.up * jump);
 
-                jumpState = 1;
+            jumpState = 1;
 
-            }
+        }
         
         else if (state == PlayerState.Climbing)
         {
             if (Input.GetKeyDown("space"))
             {
-                
                rigidbody_2d.AddForce(transform.up * jump * 3/4);
-
-
             }
         }
-        if  (Input.GetKey(KeyCode.D))
-            {
-                animator.SetInteger("AnimationState", 2);
-                rigidbody_2d.AddForce(transform.right * moveright);
 
-                if (direction != right)
-                {
-                    direction = right;
-                    Vector3 theScale = this.transform.localScale;
-                    theScale.x *= -1;
-                    this.transform.localScale = theScale;
-                }
-            }
-        if (Input.GetKey(KeyCode.A))
-            {
-                animator.SetInteger("AnimationState", 2);
-                rigidbody_2d.AddForce(-transform.right * moveleft);
+        else if  (Input.GetKey(KeyCode.D))
+        {
+            animator.SetInteger("AnimationState", 2);
+            rigidbody_2d.AddForce(transform.right * moveright);
 
-                if (direction != left)
-                {
-                    direction = left;
-                    Vector3 theScale = this.transform.localScale;
-                    theScale.x *= -1;
-                    this.transform.localScale = theScale;
-                }
-            }
-        if (jumpState == 0)
+            if (direction != right)
             {
-                animator.SetInteger("AnimationState", 0);
+                direction = right;
+                Vector3 theScale = this.transform.localScale;
+                theScale.x *= -1;
+                this.transform.localScale = theScale;
             }
+        }
 
-            Vector3 playerInfo = this.transform.transform.position;
-            mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
+        else if (Input.GetKey(KeyCode.A))
+        {
+            animator.SetInteger("AnimationState", 2);
+            rigidbody_2d.AddForce(-transform.right * moveleft);
+
+            if (direction != left)
+            {
+                direction = left;
+                Vector3 theScale = this.transform.localScale;
+                theScale.x *= -1;
+                this.transform.localScale = theScale;
+            }
+        }
+
+        else if (jumpState == 0)
+        {
+            animator.SetInteger("AnimationState", 0);
+        }
+
+        Vector3 playerInfo = this.transform.transform.position;
+        mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
         
             
     }
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Platform")
+        Debug.Log(coll.gameObject.tag);
+        if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
+        //if (coll.gameObject.tag == "Platform")
+
         {
             Transform Yposition = coll.gameObject.GetComponent<Transform>();
             if (this.transform.position.y >= Yposition.position.y)
@@ -130,13 +139,12 @@ public class Player : MonoBehaviour {
             jumpState = 0;
         }
 
-        if (coll.gameObject.tag == "Nut")
+        if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet")
         {
             Destroy(coll.gameObject);
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
         }
-
     }
     
     
@@ -163,6 +171,7 @@ public class Player : MonoBehaviour {
     
    public void ShootNuts()
     {
+        this.transform.gameObject.tag = "NotPlayer";
         GameObject bullet = Instantiate(bulletPrefab) as GameObject;
         bullet.transform.position = bulletSpawn.position;
 
@@ -176,7 +185,11 @@ public class Player : MonoBehaviour {
             Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
             bulletBody.AddForce(new Vector2(-1000, 120));
         }
+
+        this.transform.gameObject.tag = "Player";
+
         rigidbody_2d.gravityScale -= .10f;
+
     }
 
     public void climbTree()
