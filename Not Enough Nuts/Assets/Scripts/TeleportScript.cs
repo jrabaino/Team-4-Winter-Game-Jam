@@ -11,6 +11,8 @@ public class TeleportScript : MonoBehaviour {
     private Rigidbody2D rigidbody_2d;
     private Dialogue dialogue;
     private Player player;
+
+    public AudioSource MoleSound, TeleporToll;
     
 	// Use this for initialization
 	void Start ()
@@ -36,6 +38,7 @@ public class TeleportScript : MonoBehaviour {
         {
             Debug.Log("Pressed T");
             moleTalking = true;
+            MoleSound.Play();
             dialogue.activate("Mole", "You have to pay the mole toll if you want to use the Mole Hole!" + System.Environment.NewLine + "Pay 5 Nuts And Teleport Y/N?");
         }
 
@@ -43,6 +46,7 @@ public class TeleportScript : MonoBehaviour {
         {
             if (player.GetNutCount() >= Toll)
             {
+                TeleporToll.Play();
                 player.PayTheMoleToll(Toll);
                 if (Teleport_Ready1 == true)
                 {
