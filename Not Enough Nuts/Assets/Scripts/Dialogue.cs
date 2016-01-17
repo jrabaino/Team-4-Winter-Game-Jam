@@ -34,6 +34,7 @@ public class Dialogue : MonoBehaviour {
         }
 	}
 
+
     public void activate(string name, string message)
     {
         HappeningRightNow = true;
