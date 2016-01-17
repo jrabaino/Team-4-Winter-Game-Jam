@@ -20,7 +20,9 @@ public class Player : MonoBehaviour {
     public float moveright;
     public float moveleft;
     public float moveup;
-
+    
+    
+    public AudioSource Pickup, LoseNuts;
 
     private Animator animator;
     private int AnimationState;
@@ -181,11 +183,13 @@ public class Player : MonoBehaviour {
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
             rigidbody_2d.mass += .10f;
+            Pickup.Play();
         }
     }
 
     public void LoseYourShit()
     {
+        LoseNuts.Play();
         this.transform.gameObject.tag = "NotPlayer";
         int toEject = nutCount;
         for (int i = 0; i < toEject; i++)
