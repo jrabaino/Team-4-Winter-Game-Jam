@@ -11,6 +11,7 @@ TagManager:
   - SquirrelKing
   - Wall
   - NotPlayer
+  - Dropped
   layers:
   - Default
   - TransparentFX

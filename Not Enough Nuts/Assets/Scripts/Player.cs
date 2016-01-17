@@ -53,8 +53,7 @@ public class Player : MonoBehaviour {
 	    
     void Update()
     {
-        Debug.Log(state);
-            
+        Debug.Log(AnimationState);
         if(Input.GetKeyDown(KeyCode.E))
         {
             if (nutCount != 0)
@@ -69,6 +68,8 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown("space") && jumpcounter < 2)
         {
             animator.SetInteger("AnimationState", 1);
+            AnimationState = 1;
+
             jumpcounter += 1;
             rigidbody_2d.AddForce(transform.up * jump);
 
@@ -80,7 +81,9 @@ public class Player : MonoBehaviour {
         {
             //if (Input.GetKey(KeyCode.W))//Input.GetKeyDown("space"))
             //{
+            jumpcounter = 2;
                animator.SetInteger("AnimationState", 3);
+               AnimationState = 3;
 
                //rigidbody_2d.AddForce(transform.up * jump * 3/4);
                rigidbody_2d.AddForce(transform.up * moveup);
@@ -92,6 +95,8 @@ public class Player : MonoBehaviour {
         else if  (Input.GetKey(KeyCode.D))
         {
             animator.SetInteger("AnimationState", 2);
+            AnimationState = 2;
+
             rigidbody_2d.AddForce(transform.right * moveright);
 
             if (direction != right)
@@ -106,6 +111,8 @@ public class Player : MonoBehaviour {
         else if (Input.GetKey(KeyCode.A))
         {
             animator.SetInteger("AnimationState", 2);
+            AnimationState = 2;
+
             rigidbody_2d.AddForce(-transform.right * moveleft);
 
             if (direction != left)
@@ -119,9 +126,12 @@ public class Player : MonoBehaviour {
 
         else if (jumpState == 0)
         {
-            animator.SetInteger("AnimationState", 0);
+            if (AnimationState != 3)
+            {
+                animator.SetInteger("AnimationState", 0);
+                AnimationState = 0;
+            }
         }
-
         Vector3 playerInfo = this.transform.transform.position;
         mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
         
@@ -145,32 +155,49 @@ public class Player : MonoBehaviour {
             jumpState = 0;
         }
 
-        if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet")
+        if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet" || coll.gameObject.tag == "Dropped")
         {
             Destroy(coll.gameObject);
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
         }
     }
-    
+
+    public void LoseYourShit()
+    {
+        this.transform.gameObject.tag = "NotPlayer";
+        int toEject = nutCount;
+        for (int i = 0; i < toEject; i++)
+        {
+
+            GameObject bullet = Instantiate(bulletPrefab) as GameObject;
+            bullet.transform.gameObject.tag = "Dropped";
+            bullet.transform.position = bulletSpawn.position;
+            Rigidbody2D bulletBody = bullet.GetComponent<Rigidbody2D>();
+            int x = Random.Range(-1000, 1000);
+            bulletBody.AddForce(new Vector2(x, 1000)); //rng for x value on force
+            nutCount--;
+            Debug.Log("i is " + i.ToString());
+            Debug.Log("nutcount is " + nutCount.ToString());
+        }
+        this.transform.gameObject.tag = "Player";
+    }
     
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("enter");
         if (other.gameObject.tag == "Tree")
         {
             state = PlayerState.Climbing;
         }
     }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        jumpcounter = 2;
-    }
     
     void OnTriggerExit2D(Collider2D other)
     {
+        Debug.Log("exit");
         state = PlayerState.Normal;
         jumpcounter = 0;
+        animator.SetInteger("AnimationState", 1);
     }
     
     
