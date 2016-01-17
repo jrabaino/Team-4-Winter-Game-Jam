@@ -172,11 +172,6 @@ public class Player : MonoBehaviour {
             state = PlayerState.Climbing;
         }
     }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        jumpcounter = 2;
-    }
     
     void OnTriggerExit2D(Collider2D other)
     {
