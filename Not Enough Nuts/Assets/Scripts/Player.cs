@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
 	    
     void Update()
     {
-        Debug.Log(AnimationState);
+        //Debug.Log(AnimationState);
         if(Input.GetKeyDown(KeyCode.E))
         {
             if (nutCount != 0)
@@ -67,6 +67,7 @@ public class Player : MonoBehaviour {
         
         if (Input.GetKeyDown("space") && jumpcounter < 2)
         {
+
             animator.SetInteger("AnimationState", 1);
             AnimationState = 1;
 
@@ -94,8 +95,11 @@ public class Player : MonoBehaviour {
 
         else if  (Input.GetKey(KeyCode.D))
         {
-            animator.SetInteger("AnimationState", 2);
-            AnimationState = 2;
+            if (jumpState == 0)
+            {
+                animator.SetInteger("AnimationState", 2);
+                AnimationState = 2;
+            }
 
             rigidbody_2d.AddForce(transform.right * moveright);
 
@@ -110,8 +114,11 @@ public class Player : MonoBehaviour {
 
         else if (Input.GetKey(KeyCode.A))
         {
-            animator.SetInteger("AnimationState", 2);
-            AnimationState = 2;
+            if (jumpState == 0)
+            {
+                animator.SetInteger("AnimationState", 2);
+                AnimationState = 2;
+            }
 
             rigidbody_2d.AddForce(-transform.right * moveleft);
 
@@ -140,10 +147,9 @@ public class Player : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Debug.Log(coll.gameObject.tag);
+        //Debug.Log(coll.gameObject.tag);
         if (coll.gameObject.tag == "Platform" || coll.gameObject.tag == "Wall") // || coll.gameObject.tag == "Tree" || coll.gameObject.tag == "SquirrelKing" || coll.gameObject.tag == "Wall")
         //if (coll.gameObject.tag == "Platform")
-
         {
             Transform Yposition = coll.gameObject.GetComponent<Transform>();
             if (this.transform.position.y >= Yposition.position.y)
@@ -151,6 +157,7 @@ public class Player : MonoBehaviour {
                 jumpcounter = 0;
             }
 
+            Debug.Log("MADE IT TO HERE!");
             animator.SetInteger("AnimationState", 0);
             jumpState = 0;
         }
@@ -185,7 +192,7 @@ public class Player : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("enter");
+        //Debug.Log("enter");
         if (other.gameObject.tag == "Tree")
         {
             state = PlayerState.Climbing;
@@ -194,7 +201,7 @@ public class Player : MonoBehaviour {
     
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("exit");
+        //Debug.Log("exit");
         state = PlayerState.Normal;
         jumpcounter = 0;
         animator.SetInteger("AnimationState", 1);
