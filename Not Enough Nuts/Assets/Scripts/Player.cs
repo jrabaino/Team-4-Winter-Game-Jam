@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
 	    
     void Update()
     {
-        //Debug.Log(AnimationState);
+        Debug.Log(AnimationState);
         if(Input.GetKeyDown(KeyCode.E))
         {
             if (nutCount != 0)
@@ -197,6 +197,7 @@ public class Player : MonoBehaviour {
         Debug.Log("exit");
         state = PlayerState.Normal;
         jumpcounter = 0;
+        animator.SetInteger("AnimationState", 1);
     }
     
     
