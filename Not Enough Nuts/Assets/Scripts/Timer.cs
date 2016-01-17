@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     public double startTime = 9.0;
     public double timeLeft = 0.0;
     private Text timer;
+    private bool paused;
 
     // Use this for initialization
     void Start()
@@ -17,6 +18,7 @@ public class Timer : MonoBehaviour
         timeLeft = startTime;
         GameObject canvas = GameObject.Find("HUD");
         timer = canvas.transform.FindChild("TimerBG").FindChild("TimeLeft").GetComponent<Text>();
+        paused = true; //maybe change ? i'm envisioning the game starting with dialogue up
 
 
 
@@ -24,27 +26,38 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        int secondsLeft = (int)timeLeft;
-        int minutes = secondsLeft / 60;
-        int seconds = secondsLeft % 60;
-        string s = seconds.ToString();
-        if (seconds < 10)
+        if (!paused)
         {
-            s = "0" + s;
-        }
+            timeLeft -= Time.deltaTime;
+            int secondsLeft = (int)timeLeft;
+            int minutes = secondsLeft / 60;
+            int seconds = secondsLeft % 60;
+            string s = seconds.ToString();
+            if (seconds < 10)
+            {
+                s = "0" + s;
+            }
 
-        timer.text = minutes.ToString() + ":" + s;
-        if (timeLeft <= 0)
-        {
-      //          SceneManager.LoadScene("GameOver");
+            timer.text = minutes.ToString() + ":" + s;
+
+            if (timeLeft <= 0)
+            {
+                //          SceneManager.LoadScene("GameOver");
 
                 Application.LoadLevel("GameOver");
 
                 timeLeft = 0.0;
+            }
         }
 
-
-
     }
+    public void pause()
+    {
+        paused = true;
+    }
+    public void unpause()
+    {
+        paused = false;
+    }
+
 }
