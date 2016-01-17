@@ -35,6 +35,8 @@ public class Player : MonoBehaviour {
 
     public Camera mainCamera;
 
+    private Dialogue dialogue;
+
 
 	// Use this for initialization
 	void Start () 
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour {
         
 
         animator = this.GetComponent<Animator>();
+        dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
 	}
 	
 	// Update is called once per frame
@@ -54,94 +57,96 @@ public class Player : MonoBehaviour {
     void Update()
     {
         //Debug.Log(AnimationState);
-        if(Input.GetKeyDown(KeyCode.E))
+        if (!dialogue.IsSomeoneTalking())
         {
-            if (nutCount != 0)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                ShootNuts();
-                nutCount--;
-            }
-        }
-
-
-        
-        if (Input.GetKeyDown("space") && jumpcounter < 2)
-        {
-
-            animator.SetInteger("AnimationState", 1);
-            AnimationState = 1;
-
-            jumpcounter += 1;
-            rigidbody_2d.AddForce(transform.up * jump);
-
-            jumpState = 1;
-
-        }
-        
-        else if (Input.GetKey(KeyCode.W) && state == PlayerState.Climbing)
-        {
-            //if (Input.GetKey(KeyCode.W))//Input.GetKeyDown("space"))
-            //{
-            jumpcounter = 2;
-               animator.SetInteger("AnimationState", 3);
-               AnimationState = 3;
-
-               //rigidbody_2d.AddForce(transform.up * jump * 3/4);
-               rigidbody_2d.AddForce(transform.up * moveup);
-            //}
-
-
-        }
-
-        else if  (Input.GetKey(KeyCode.D))
-        {
-            if (jumpState == 0)
-            {
-                animator.SetInteger("AnimationState", 2);
-                AnimationState = 2;
+                if (nutCount != 0)
+                {
+                    ShootNuts();
+                    nutCount--;
+                }
             }
 
-            rigidbody_2d.AddForce(transform.right * moveright);
 
-            if (direction != right)
+
+            if (Input.GetKeyDown("space") && jumpcounter < 2)
             {
-                direction = right;
-                Vector3 theScale = this.transform.localScale;
-                theScale.x *= -1;
-                this.transform.localScale = theScale;
+
+                animator.SetInteger("AnimationState", 1);
+                AnimationState = 1;
+
+                jumpcounter += 1;
+                rigidbody_2d.AddForce(transform.up * jump);
+
+                jumpState = 1;
+
             }
+
+            else if (Input.GetKey(KeyCode.W) && state == PlayerState.Climbing)
+            {
+                //if (Input.GetKey(KeyCode.W))//Input.GetKeyDown("space"))
+                //{
+                jumpcounter = 2;
+                animator.SetInteger("AnimationState", 3);
+                AnimationState = 3;
+
+                //rigidbody_2d.AddForce(transform.up * jump * 3/4);
+                rigidbody_2d.AddForce(transform.up * moveup);
+                //}
+
+
+            }
+
+            else if (Input.GetKey(KeyCode.D))
+            {
+                if (jumpState == 0)
+                {
+                    animator.SetInteger("AnimationState", 2);
+                    AnimationState = 2;
+                }
+
+                rigidbody_2d.AddForce(transform.right * moveright);
+
+                if (direction != right)
+                {
+                    direction = right;
+                    Vector3 theScale = this.transform.localScale;
+                    theScale.x *= -1;
+                    this.transform.localScale = theScale;
+                }
+            }
+
+            else if (Input.GetKey(KeyCode.A))
+            {
+                if (jumpState == 0)
+                {
+                    animator.SetInteger("AnimationState", 2);
+                    AnimationState = 2;
+                }
+
+                rigidbody_2d.AddForce(-transform.right * moveleft);
+
+                if (direction != left)
+                {
+                    direction = left;
+                    Vector3 theScale = this.transform.localScale;
+                    theScale.x *= -1;
+                    this.transform.localScale = theScale;
+                }
+            }
+
+            else if (jumpState == 0)
+            {
+                if (AnimationState != 3)
+                {
+                    animator.SetInteger("AnimationState", 0);
+                    AnimationState = 0;
+                }
+            }
+            Vector3 playerInfo = this.transform.transform.position;
+            mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
         }
-
-        else if (Input.GetKey(KeyCode.A))
-        {
-            if (jumpState == 0)
-            {
-                animator.SetInteger("AnimationState", 2);
-                AnimationState = 2;
-            }
-
-            rigidbody_2d.AddForce(-transform.right * moveleft);
-
-            if (direction != left)
-            {
-                direction = left;
-                Vector3 theScale = this.transform.localScale;
-                theScale.x *= -1;
-                this.transform.localScale = theScale;
-            }
-        }
-
-        else if (jumpState == 0)
-        {
-            if (AnimationState != 3)
-            {
-                animator.SetInteger("AnimationState", 0);
-                AnimationState = 0;
-            }
-        }
-        Vector3 playerInfo = this.transform.transform.position;
-        mainCamera.transform.position = new Vector3(playerInfo.x, playerInfo.y, playerInfo.z - 10);
-        
             
     }
 

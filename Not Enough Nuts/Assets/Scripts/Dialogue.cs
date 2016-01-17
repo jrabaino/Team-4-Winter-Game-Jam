@@ -48,4 +48,8 @@ public class Dialogue : MonoBehaviour {
             canvas.transform.FindChild("DialogueBackground").FindChild("Name").GetComponent<Image>();
         }*/ //switch picture based on character name? 
     }
+    public bool IsSomeoneTalking()
+    {
+        return HappeningRightNow;
+    }
 }
