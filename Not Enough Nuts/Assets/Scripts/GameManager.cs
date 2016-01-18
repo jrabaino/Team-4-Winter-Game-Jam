@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour {
     }
     private string KingSays()
     {
-        string[] phrases = { "NUTS FOR THE NUT GOD!", "THAT'S A LOT OF NUTS... but not enough!", "MORE!!!!!!!!!!!!!!1" };
+        string[] phrases = { "NUTS FOR THE NUT GOD!", "THAT'S A LOT OF NUTS... but not enough!", "MORE!!!!!!!!!!!!!!1", turnedIn.ToString()+ "??? How pathetic.", "Do you really think that is enough to satisfy me, I mean, my kingdom's hunger?", "You... You're joking, right?", "TOOK YOU LONG ENOUGH. NOW GET ME SOME MORE!"};
         int i = UnityEngine.Random.Range(0, phrases.Length);
         return phrases[i];
     }
@@ -81,8 +81,14 @@ public class GameManager : MonoBehaviour {
             level++;
             goalBefore = goal;
             goal = goal * 2;
-            timer.timeLeft += (10.0 * (goal - goalBefore)); //(adds 10 seconds per additonal nut asked for) 
-
+            if (level < 4)
+            {
+                timer.timeLeft += (10.0 * (goal - goalBefore)); //(adds 10 seconds per additonal nut asked for) 
+            }
+            else
+            {
+                timer.timeLeft = goal * 5.0;
+            }
             
             //add in thing later that will display message w/ GUI overlay and talk sprite
         }

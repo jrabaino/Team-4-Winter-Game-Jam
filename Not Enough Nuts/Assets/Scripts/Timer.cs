@@ -6,7 +6,7 @@ using UnityEngine.UI;
 //using Math;
 public class Timer : MonoBehaviour
 {
-    public double startTime = 9.0;
+    public double startTime = 600.0;
     public double timeLeft = 0.0;
     private Text timer;
     private bool paused;
