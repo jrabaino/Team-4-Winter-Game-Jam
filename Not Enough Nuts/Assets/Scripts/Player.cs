@@ -22,7 +22,9 @@ public class Player : MonoBehaviour {
     public float moveup;
     
     
-    public AudioSource Pickup, LoseNuts;
+    public AudioSource Pickup, LoseNuts, HitByBadger;
+    public AudioSource Shoot, Jump1, Jump2, NoAmmo;
+
 
     private Animator animator;
     private int AnimationState;
@@ -65,8 +67,13 @@ public class Player : MonoBehaviour {
             {
                 if (nutCount != 0)
                 {
+                    Shoot.Play();
                     ShootNuts();
                     nutCount--;
+                }
+                else
+                {
+                    NoAmmo.Play();
                 }
             }
 
@@ -74,7 +81,14 @@ public class Player : MonoBehaviour {
 
             if (Input.GetKeyDown("space") && jumpcounter < 2)
             {
-
+                if(jumpcounter == 0)
+                {
+                    Jump1.Play();
+                }
+                else if(jumpcounter == 1)
+                {
+                    Jump2.Play();
+                }
                 animator.SetInteger("AnimationState", 1);
                 AnimationState = 1;
 

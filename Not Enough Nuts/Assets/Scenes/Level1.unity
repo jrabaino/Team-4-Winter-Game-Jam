@@ -7438,10 +7438,11 @@ MonoBehaviour:
   moveup: 15
   Pickup: {fileID: 1668391673}
   LoseNuts: {fileID: 1914643662}
+  HitByBadger: {fileID: 1914643662}
+  Shoot: {fileID: 886199604}
   Jump1: {fileID: 840589238}
   Jump2: {fileID: 1515859783}
-  Shoot: {fileID: 886199604}
-  NoNutAmmo: {fileID: 1752012653}
+  NoAmmo: {fileID: 1752012653}
   mainCamera: {fileID: 1811240847}
 --- !u!61 &795782916
 BoxCollider2D:
