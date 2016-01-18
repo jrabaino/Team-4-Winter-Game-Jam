@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
     
     public AudioSource Pickup, LoseNuts, HitByBadger;
     public AudioSource Shoot, Jump1, Jump2, NoAmmo;
+   
 
 
     private Animator animator;
@@ -110,7 +111,7 @@ public class Player : MonoBehaviour {
                 //rigidbody_2d.AddForce(transform.up * jump * 3/4);
                 rigidbody_2d.AddForce(transform.up * moveup);
                 //}
-
+                
 
             }
 
