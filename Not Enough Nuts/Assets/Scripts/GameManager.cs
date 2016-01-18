@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
     private int level;
     private Dialogue dialogue;
     private Timer timer;
+
+    public AudioSource Hitmark;
     
 
 	// Use this for initialization
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour {
 	}
     public void TurnInNut()
     {
+        Hitmark.Play();
         turnedIn++;
     }
     public int TurnedIn()
