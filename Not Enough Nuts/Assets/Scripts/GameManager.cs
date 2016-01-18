@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
     }
     private string KingSays()
     {
-        string[] phrases = { "NUTS FOR THE NUT GOD", "THAT'S A LOT OF NUTS... but not enough", "MORE!!!!!!!!!!!!!!1" };
+        string[] phrases = { "NUTS FOR THE NUT GOD!", "THAT'S A LOT OF NUTS... but not enough!", "MORE!!!!!!!!!!!!!!1" };
         int i = UnityEngine.Random.Range(0, phrases.Length);
         return phrases[i];
     }
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
         int goalBefore;
         if (turnedIn >= goal)
         {
-            dialogue.activate("Squirrel King", KingSays());
+            dialogue.activate("King Nutter", KingSays());
             level++;
             goalBefore = goal;
             goal = goal * 2;
