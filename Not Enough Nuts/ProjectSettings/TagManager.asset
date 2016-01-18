@@ -16,6 +16,7 @@ TagManager:
   - TeleportPad1
   - TeleportPad2
   - Mole
+  - Head
   layers:
   - Default
   - TransparentFX
