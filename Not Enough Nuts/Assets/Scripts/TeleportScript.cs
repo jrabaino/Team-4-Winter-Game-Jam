@@ -13,6 +13,10 @@ public class TeleportScript : MonoBehaviour {
     private Player player;
 
     public AudioSource MoleSound, TeleporToll;
+
+
+    GameObject Head;
+    Animator animator;
     
 	// Use this for initialization
 	void Start ()
@@ -25,6 +29,9 @@ public class TeleportScript : MonoBehaviour {
         player = GameObject.Find("Squirrel").GetComponent<Player>();
         moleTalking = false;
         Toll = 5;
+
+        Head = GameObject.FindGameObjectWithTag("Head");
+        animator = Head.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -40,6 +47,7 @@ public class TeleportScript : MonoBehaviour {
             moleTalking = true;
             MoleSound.Play();
             dialogue.activate("Mole", "You have to pay the mole toll if you want to use the Mole Hole!" + System.Environment.NewLine + "Pay 5 Nuts And Teleport Y/N?");
+            animator.SetInteger("AnimationState", 1);
         }
 
         if (moleTalking && Input.GetKeyDown(KeyCode.Y))
