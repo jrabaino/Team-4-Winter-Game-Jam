@@ -20,7 +20,7 @@ public class Dialogue : MonoBehaviour {
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         debriefing = true;
         debriefIndex = 0;
-       startDialogue = new string[5]; //{ "Press Space to advance dialogue", "SUBJECT #4531, ARISE! YOUR TIME HAS COME! THE KINGDOM APPROCHES THE DIRE TIME OF THE GREAT FROST. IT IS YOUR DUTY TO GATHER PROVISIONS FOR MY KINGDOM TO SURVIVE THE HARSH COLD.", "Use WASD to run and climb " + System.Environment.NewLine + "Use Space to jump " + System.Environment.NewLine + "Use E to fling nuts with your tail", };
+        startDialogue = new string[5]; //{ "Press Space to advance dialogue", "SUBJECT #4531, ARISE! YOUR TIME HAS COME! THE KINGDOM APPROCHES THE DIRE TIME OF THE GREAT FROST. IT IS YOUR DUTY TO GATHER PROVISIONS FOR MY KINGDOM TO SURVIVE THE HARSH COLD.", "Use WASD to run and climb " + System.Environment.NewLine + "Use Space to jump " + System.Environment.NewLine + "Use E to fling nuts with your tail", };
         startDialogue[0] = "Press Space to advance dialogue";
         startDialogue[1] = "SUBJECT #4531, ARISE! YOUR TIME HAS COME! THE KINGDOM APPROCHES THE DIRE TIME OF THE GREAT FROST. IT IS YOUR DUTY TO GATHER PROVISIONS FOR MY KINGDOM TO SURVIVE THE HARSH COLD.";
         startDialogue[2] = "Use WASD to run and climb " + System.Environment.NewLine + "Use Space to jump " + System.Environment.NewLine + "Use E to fling nuts with your tail";

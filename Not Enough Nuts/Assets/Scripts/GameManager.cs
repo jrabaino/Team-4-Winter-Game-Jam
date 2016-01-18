@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour {
     
 
 	// Use this for initialization
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+    }
 	void Start () {
         player = GameObject.Find("Squirrel").GetComponent<Player>();
         GameObject canvas = GameObject.Find("HUD");
@@ -38,6 +42,10 @@ public class GameManager : MonoBehaviour {
     public void TurnInNut()
     {
         turnedIn++;
+    }
+    public int TurnedIn()
+    {
+        return turnedIn;
     }
     private string KingSays()
     {

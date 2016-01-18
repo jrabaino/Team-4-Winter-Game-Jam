@@ -10,6 +10,7 @@ public class Timer : MonoBehaviour
     public double timeLeft = 0.0;
     private Text timer;
     private bool paused;
+    private Dialogue dialogue;
 
     // Use this for initialization
     void Start()
@@ -18,7 +19,9 @@ public class Timer : MonoBehaviour
         timeLeft = startTime;
         GameObject canvas = GameObject.Find("HUD");
         timer = canvas.transform.FindChild("TimerBG").FindChild("TimeLeft").GetComponent<Text>();
-        paused = true; //maybe change ? i'm envisioning the game starting with dialogue up
+        dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
+        paused = true; 
+        
 
 
 
