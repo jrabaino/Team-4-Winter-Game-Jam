@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour {
         int goalBefore;
         if (turnedIn >= goal)
         {
-            dialogue.activate("Squirrel King", KingSays());
+            dialogue.activate("King Nutter", KingSays());
             level++;
             goalBefore = goal;
             goal = goal * 2;
