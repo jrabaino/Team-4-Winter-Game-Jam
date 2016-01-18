@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Squirrel_King_Head
+  m_Name: Mole_Head
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -17,14 +17,10 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0
+    - time: .283333331
       value: {fileID: 21300000, guid: 7812c7506d542654eaad5c9d782b9516, type: 3}
-    - time: .13333334
+    - time: .533333361
       value: {fileID: 21300000, guid: 83db916a1dc217040931ebbde9118d6f, type: 3}
-    - time: .150000006
-      value: {fileID: 21300000, guid: b887a80152eadf547878882838d2a4de, type: 3}
-    - time: .266666681
-      value: {fileID: 21300000, guid: ed7da00f240d41d4f85e97ec28e4fd3a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 114
@@ -45,12 +41,10 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 21300000, guid: 7812c7506d542654eaad5c9d782b9516, type: 3}
     - {fileID: 21300000, guid: 83db916a1dc217040931ebbde9118d6f, type: 3}
-    - {fileID: 21300000, guid: b887a80152eadf547878882838d2a4de, type: 3}
-    - {fileID: 21300000, guid: ed7da00f240d41d4f85e97ec28e4fd3a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .283333361
+    m_StopTime: .550000012
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
