@@ -20,13 +20,14 @@ public class Dialogue : MonoBehaviour {
         timer = GameObject.Find("Timer").GetComponent<Timer>();
         debriefing = true;
         debriefIndex = 0;
-        startDialogue = new string[5]; //{ "Press Space to advance dialogue", "SUBJECT #4531, ARISE! YOUR TIME HAS COME! THE KINGDOM APPROCHES THE DIRE TIME OF THE GREAT FROST. IT IS YOUR DUTY TO GATHER PROVISIONS FOR MY KINGDOM TO SURVIVE THE HARSH COLD.", "Use WASD to run and climb " + System.Environment.NewLine + "Use Space to jump " + System.Environment.NewLine + "Use E to fling nuts with your tail", };
+        startDialogue = new string[6]; //{ "Press Space to advance dialogue", "SUBJECT #4531, ARISE! YOUR TIME HAS COME! THE KINGDOM APPROCHES THE DIRE TIME OF THE GREAT FROST. IT IS YOUR DUTY TO GATHER PROVISIONS FOR MY KINGDOM TO SURVIVE THE HARSH COLD.", "Use WASD to run and climb " + System.Environment.NewLine + "Use Space to jump " + System.Environment.NewLine + "Use E to fling nuts with your tail", };
         startDialogue[0] = "Press Space to advance dialogue";
         startDialogue[1] = "SUBJECT #4531, ARISE! YOUR TIME HAS COME! THE KINGDOM APPROCHES THE DIRE TIME OF THE GREAT FROST. IT IS YOUR DUTY TO GATHER PROVISIONS FOR MY KINGDOM TO SURVIVE THE HARSH COLD.";
         startDialogue[2] = "Use WASD to run and climb " + System.Environment.NewLine + "Use Space to jump " + System.Environment.NewLine + "Use E to fling nuts with your tail";
-        startDialogue[3] = "Press T on top of a mole hole to move quickly across the forest";
-        startDialogue[4] = "GOOD LUCK SUBJECT 4531. MAY YOU VANQUISH THE BADGER MENACE AND HARVEST PLENTY. YOUR NATION IS COUNTING ON YOU.";   
-        activate("Squirrel King", startDialogue[0]);
+        startDialogue[3] = "Fling nuts at me, King Nutter, to add them to the Squirrel Kingdom's Reserve" + System.Environment.NewLine + "Press T on top of a mole hole to move quickly across the forest";
+        startDialogue[4] = "THE MORE NUTS YOU CARRY, THE HARDER IT WILL BE TO RUN,JUMP, AND CLIMB. USE YOUR TIME WISELY.";
+        startDialogue[5] = "GOOD LUCK SUBJECT 4531. MAY YOU VANQUISH THE BADGER MENACE AND HARVEST PLENTY. YOUR NATION IS COUNTING ON YOU.";   
+        activate("King Nutter", startDialogue[0]);
         debriefIndex++;
 	}
 	
@@ -34,7 +35,7 @@ public class Dialogue : MonoBehaviour {
 	void Update () {
         if (debriefing && Input.GetKeyDown("space"))
         {
-            activate("Squirrel King", startDialogue[debriefIndex]);
+            activate("King Nutter", startDialogue[debriefIndex]);
             debriefIndex++;
             if (debriefIndex == startDialogue.Length)
             {

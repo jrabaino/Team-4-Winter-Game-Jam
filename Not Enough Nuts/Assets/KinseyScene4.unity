@@ -4422,6 +4422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bbde71e859e9f24db3330ad609704ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoleSound: {fileID: 0}
+  TeleporToll: {fileID: 0}
 --- !u!114 &795782915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4440,6 +4442,11 @@ MonoBehaviour:
   moveup: 15
   Pickup: {fileID: 77711643}
   LoseNuts: {fileID: 1616438697}
+  HitByBadger: {fileID: 0}
+  Shoot: {fileID: 0}
+  Jump1: {fileID: 0}
+  Jump2: {fileID: 0}
+  NoAmmo: {fileID: 0}
   mainCamera: {fileID: 1811240847}
 --- !u!61 &795782916
 BoxCollider2D:
@@ -7741,7 +7748,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11442388, guid: 0f7f166d051a18c459e768e1c4aac3b1, type: 2}
       propertyPath: startTime
-      value: 60
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f7f166d051a18c459e768e1c4aac3b1, type: 2}
