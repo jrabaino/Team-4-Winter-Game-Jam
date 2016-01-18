@@ -22,7 +22,9 @@ public class Player : MonoBehaviour {
     public float moveup;
     
     
-    public AudioSource Pickup, LoseNuts, Jump1, Jump2, Shoot, NoNutAmmo;
+    public AudioSource Pickup, LoseNuts, HitByBadger;
+    public AudioSource Shoot, Jump1, Jump2, NoAmmo;
+
 
     private Animator animator;
     private int AnimationState;
@@ -65,14 +67,13 @@ public class Player : MonoBehaviour {
             {
                 if (nutCount != 0)
                 {
-                    ShootNuts();
                     Shoot.Play();
+                    ShootNuts();
                     nutCount--;
-
                 }
-                else 
+                else
                 {
-                    NoNutAmmo.Play();
+                    NoAmmo.Play();
                 }
             }
 
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour {
                 }
                 animator.SetInteger("AnimationState", 1);
                 AnimationState = 1;
+
                 jumpcounter += 1;
                 rigidbody_2d.AddForce(transform.up * jump);
 

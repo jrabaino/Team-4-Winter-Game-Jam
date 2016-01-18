@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour {
     private int count;
 
     private bool pursuit = false;
-
+   
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Squirrel").GetComponent<Player>();
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour {
         {
 
             animator.SetInteger("AnimationState", 1);
-
+            
             if (player.transform.position.x > transform.position.x)
             {
                 if (direction == left)
@@ -116,6 +116,7 @@ public class Enemy : MonoBehaviour {
                 transform.Translate(-0.05f, 0.0f, 0.0f);
             }
             pursuit = true;
+            
         }
         else
         {
