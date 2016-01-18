@@ -12,15 +12,14 @@ public class GameManager : MonoBehaviour {
     private int level;
     private Dialogue dialogue;
     private Timer timer;
+    private bool isGameOver;
+    private CanvasGroup GameOver;
 
     public AudioSource Hitmark;
     
 
 	// Use this for initialization
-    void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
-    }
+
 	void Start () {
         player = GameObject.Find("Squirrel").GetComponent<Player>();
         GameObject canvas = GameObject.Find("HUD");
@@ -28,9 +27,11 @@ public class GameManager : MonoBehaviour {
         goalGUI = canvas.transform.FindChild("GoalBG").FindChild("Goal").GetComponent<Text>();
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
         timer = GameObject.Find("Timer").GetComponent<Timer>();
+        GameOver = GameObject.Find("Dialogue").transform.FindChild("GAMEOVERSHIT").GetComponent<CanvasGroup>();
         level = 1;
         goal = 2;
         turnedIn = 0;
+        isGameOver = false;
 
 	}
 	
@@ -40,6 +41,20 @@ public class GameManager : MonoBehaviour {
         goalGUI.text = turnedIn.ToString() + "/" + goal.ToString();
         goalCheck();
 
+        if (timer.timeLeft <= 0.0)
+        {
+            isGameOver = true;
+            GameOver.alpha = 1;
+            dialogue.activate("King Nutter", "LET IT BE KNOWN THAT SUBJECT #4135 HAS DISAPPOINTED ME ONCE AGAIN. SHE ONLY GATHERED " + turnedIn.ToString() + " NUTS.");
+
+
+            if (Input.GetKey(KeyCode.Return))
+            {
+                Application.LoadLevel("Menu");
+
+                player.setToZero();
+            }
+        }
 	}
     public void TurnInNut()
     {
@@ -48,6 +63,7 @@ public class GameManager : MonoBehaviour {
     }
     public int TurnedIn()
     {
+        Debug.Log(turnedIn);
         return turnedIn;
     }
     private string KingSays()

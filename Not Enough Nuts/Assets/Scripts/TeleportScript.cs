@@ -17,7 +17,7 @@ public class TeleportScript : MonoBehaviour {
 
     GameObject Head;
     Animator animator;
-    
+
 	// Use this for initialization
 	void Start ()
     {

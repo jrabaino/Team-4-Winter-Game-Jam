@@ -4,7 +4,7 @@ using System.Collections;
 public class Follow : MonoBehaviour {
 
     private Rigidbody2D rigidbody_2d;
-    int hit = 1;
+
     float x = 100.0f;
     float y = 100.0f;
 
@@ -24,7 +24,7 @@ public class Follow : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Wall")
         {
-            Debug.Log("HIT!");
+            
             x = -x;
             y = -y;
         }

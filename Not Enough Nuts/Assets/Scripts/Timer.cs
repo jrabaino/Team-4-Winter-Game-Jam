@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     private Text timer;
     private bool paused;
     private Dialogue dialogue;
+    private GameManager manager;
 
     // Use this for initialization
     void Start()
@@ -20,7 +21,8 @@ public class Timer : MonoBehaviour
         GameObject canvas = GameObject.Find("HUD");
         timer = canvas.transform.FindChild("TimerBG").FindChild("TimeLeft").GetComponent<Text>();
         dialogue = GameObject.Find("Dialogue").GetComponent<Dialogue>();
-        paused = true; 
+        paused = true;
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
         
 
 
@@ -47,7 +49,8 @@ public class Timer : MonoBehaviour
             {
                 //          SceneManager.LoadScene("GameOver");
 
-                Application.LoadLevel("GameOver");
+               // Application.LoadLevel("GameOver");
+                
 
                 timeLeft = 0.0;
             }

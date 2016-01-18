@@ -61,6 +61,7 @@ public class Player : MonoBehaviour {
 	    
     void Update()
     {
+        //Debug.Log(nutCount);
         //Debug.Log(AnimationState);
         if (!dialogue.IsSomeoneTalking())
         {
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour {
             {
                 if (nutCount != 0)
                 {
+                    Debug.Log("SHOT SHOT SHOT");
                     Shoot.Play();
                     ShootNuts();
                     nutCount--;
@@ -179,7 +181,6 @@ public class Player : MonoBehaviour {
                 jumpcounter = 0;
             }
 
-            Debug.Log("MADE IT TO HERE!");
             animator.SetInteger("AnimationState", 0);
             jumpState = 0;
 
@@ -194,17 +195,19 @@ public class Player : MonoBehaviour {
 
         if (coll.gameObject.tag == "Nut" || coll.gameObject.tag == "bullet" || coll.gameObject.tag == "Dropped")
         {
+            Debug.Log("IT WENT HERE WTF");
             Destroy(coll.gameObject);
             nutCount++;
             rigidbody_2d.gravityScale += .10f;
             rigidbody_2d.mass += .10f;
-            Pickup.Play();
+            //Pickup.Play();
         }
     }
 
     public void LoseYourShit()
     {
-        LoseNuts.Play();
+        Debug.Log("LOST OUR SHIT");
+        //LoseNuts.Play();
         this.transform.gameObject.tag = "NotPlayer";
         int toEject = nutCount;
         for (int i = 0; i < toEject; i++)
@@ -219,8 +222,8 @@ public class Player : MonoBehaviour {
             nutCount--;
             rigidbody_2d.mass -= .10f;
             rigidbody_2d.gravityScale -= .10f;
-            Debug.Log("i is " + i.ToString());
-            Debug.Log("nutcount is " + nutCount.ToString());
+            //Debug.Log("i is " + i.ToString());
+            //Debug.Log("nutcount is " + nutCount.ToString());
         }
         this.transform.gameObject.tag = "Player";
     }
@@ -246,6 +249,7 @@ public class Player : MonoBehaviour {
     
    public void ShootNuts()
     {
+        Debug.Log("IMY NUTS GOT SHT");
         this.transform.gameObject.tag = "NotPlayer";
         GameObject bullet = Instantiate(bulletPrefab) as GameObject;
         bullet.transform.position = bulletSpawn.position;
@@ -289,6 +293,12 @@ public class Player : MonoBehaviour {
         nutCount -= toll;
         rigidbody_2d.gravityScale -= toll*.10f;
         rigidbody_2d.mass -= toll*.10f;
+    }
+
+    public void setToZero()
+    {
+        Debug.Log("SET TO ZERO");
+        nutCount = 0;
     }
 
 

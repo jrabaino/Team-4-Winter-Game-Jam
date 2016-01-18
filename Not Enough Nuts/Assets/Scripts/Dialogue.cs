@@ -13,6 +13,8 @@ public class Dialogue : MonoBehaviour {
     UnityEngine.UI.Text m_message;
     UnityEngine.UI.Text m_name;
     Timer timer;
+
+
 	void Start () {
         canvas = GameObject.Find("Dialogue");
         HappeningRightNow = false; //change later?
