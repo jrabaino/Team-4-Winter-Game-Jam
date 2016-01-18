@@ -5398,7 +5398,7 @@ Transform:
   m_LocalScale: {x: 1.23272586, y: 2.45665884, z: 1}
   m_Children: []
   m_Father: {fileID: 1681866711}
-  m_RootOrder: 25
+  m_RootOrder: 24
 --- !u!1 &587139627
 GameObject:
   m_ObjectHideFlags: 0
@@ -13358,7 +13358,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11442388, guid: 0f7f166d051a18c459e768e1c4aac3b1, type: 2}
       propertyPath: startTime
-      value: 200
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f7f166d051a18c459e768e1c4aac3b1, type: 2}
@@ -14319,6 +14319,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11484214, guid: 146c70681dff062449e3e3a5c6a8ff31, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0194152c90a5d944bb9cbd83663f8ad7,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 146c70681dff062449e3e3a5c6a8ff31, type: 2}
   m_IsPrefabParent: 0
@@ -14991,13 +14996,13 @@ Transform:
   - {fileID: 937270626}
   - {fileID: 96710628}
   - {fileID: 511870434}
-  - {fileID: 1524528388}
   - {fileID: 585665991}
   - {fileID: 1105926873}
   - {fileID: 1142554423}
   - {fileID: 1450142229}
-  - {fileID: 1010758138}
+  - {fileID: 1524528388}
   - {fileID: 2031204521}
+  - {fileID: 1010758138}
   - {fileID: 1716081070}
   - {fileID: 402756099}
   - {fileID: 1582401362}
